@@ -39,15 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ImageElement.cs" />
+    <Compile Include="DocumentElement.cs" />
+    <Compile Include="ElipseElement.cs" />
     <Compile Include="IColor.cs" />
     <Compile Include="IColoredPositionedElement.cs" />
     <Compile Include="IElement.cs" />
     <Compile Include="IPositionedElement.cs" />
     <Compile Include="IElementContainer.cs" />
+    <Compile Include="LineElement.cs" />
     <Compile Include="Modules\LayoutFactory.cs" />
     <Compile Include="Modules\Layout.cs" />
+    <Compile Include="Modules\ElementPlacementService.cs" />
+    <Compile Include="PageElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RectangleElement.cs" />
+    <Compile Include="TemplateElement.cs" />
     <Compile Include="Utils\UnitConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

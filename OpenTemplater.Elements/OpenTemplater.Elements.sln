@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Elements", "O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Elements.Test", "OpenTemplater.Elements.Test\OpenTemplater.Elements.Test.csproj", "{D5B58B23-D46A-4EDC-9C95-34D34339C5FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater", "OpenTemplater\OpenTemplater.csproj", "{23212FAB-DB78-40F8-AF2F-2E9139DA3F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Test", "OpenTemplater.Test\OpenTemplater.Test.csproj", "{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{D5B58B23-D46A-4EDC-9C95-34D34339C5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B58B23-D46A-4EDC-9C95-34D34339C5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B58B23-D46A-4EDC-9C95-34D34339C5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23212FAB-DB78-40F8-AF2F-2E9139DA3F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23212FAB-DB78-40F8-AF2F-2E9139DA3F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23212FAB-DB78-40F8-AF2F-2E9139DA3F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23212FAB-DB78-40F8-AF2F-2E9139DA3F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
