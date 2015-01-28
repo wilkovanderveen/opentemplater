@@ -10,42 +10,45 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Author" minOccurs ="0" type="xs:string"/>
-        <xs:element name="PageTemplates">
+        <xs:element name="Colors">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="PageTemplate" type="PageTemplateBase" minOccurs="1" maxOccurs="unbounded" />
+              <xs:element name="Color" type="ColorType" maxOccurs="unbounded" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Document" type="Document">
+        <xs:element name="PageTemplates">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PageTemplate" type="PageTemplate" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Document" type="DocumentType">
         </xs:element>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-  <xs:complexType name="Document">
+  <xs:complexType name="DocumentType">
     <xs:sequence>
      
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType abstract ="true" name="PageTemplateBase">
+  <xs:complexType name="PageTemplate">
     <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
 
-  <xs:complexType name="StaticPageTemplate">
-    <xs:complexContent>
-      <xs:extension base="PageTemplateBase">
-        
-      </xs:extension>
-    </xs:complexContent>
+  <xs:complexType name="StaticContents">
+    
   </xs:complexType>
 
-  <xs:complexType name="DynamicPageTemplate">
-    <xs:complexContent>
-      <xs:extension base="PageTemplateBase">
+  <xs:complexType name="DynamicContents">
+    
+  </xs:complexType>
 
-      </xs:extension>
-    </xs:complexContent>
+  <xs:complexType name="ColorType">
+    <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
 </xs:schema>

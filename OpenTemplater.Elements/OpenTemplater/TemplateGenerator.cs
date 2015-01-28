@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -8,16 +11,16 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater
 {
-    public class DocumentGenerator
+    public class TemplateGenerator
     {
-        public void GenerateDocument(string filename)
+        public void GenerateTemplate(string filename)
         {
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
 
             ValidateXml(xmlDocument);
 
-           TemplateElement templateElement = CreateTemplate(xmlDocument.SelectSingleNode("/Template"));
+           Template template = CreateTemplate(xmlDocument.SelectSingleNode("/Template"));
         }
 
         private void ValidateXml(XmlDocument xmlDocument)
@@ -28,7 +31,7 @@ namespace OpenTemplater
 
             settings.ValidationEventHandler += ValidationCallBack;
 
-            settings.Schemas.Add(null, filename);
+            settings.Schemas.Add("http://tempuri.org/OpenTemplater.xsd", filename);
           
 
             XmlReader xmlReader = XmlReader.Create(new StringReader(xmlDocument.InnerXml), settings);
@@ -46,9 +49,14 @@ namespace OpenTemplater
         }
 
 
-        private TemplateElement CreateTemplate(XmlNode templateNode)
+        private Template CreateTemplate(XmlNode templateNode)
         {
             if (templateNode == null) throw new ArgumentNullException("templateNode");
+
+            XmlNodeList colorNodeList = templateNode.SelectNodes("Colors/Color");
+
+            IDictionary<string, IColor> colorDictionary = CreateColors(colorNodeList);
+
 
             DocumentElement document = CreateDocument(templateNode.SelectSingleNode("Document"));
 
@@ -59,8 +67,20 @@ namespace OpenTemplater
                 author = authorNode.InnerText;
             }
 
-           return new TemplateElement(document, author);
+           return new Template(document, author);
             
+        }
+
+        private IDictionary<string, IColor> CreateColors(XmlNodeList colorNodeList)
+        {
+            if (colorNodeList == null) throw new ArgumentNullException("colorsNode");
+
+            foreach (XmlNode colorNode in colorNodeList)
+            {
+                
+            }
+
+            throw new NotImplementedException();
         }
 
         private DocumentElement CreateDocument(XmlNode documentNode)

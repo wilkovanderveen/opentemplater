@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Template>
   <Author>MyFirstAuthor</Author>
+  <Colors>
+    <Color key="red">
+      <CMYK cyan="0.4" magenta="0" yellow ="0" black="0.10" />
+      <RGB red="200" green="0" blue="0" />
+      <PMS name="PMS302" />
+    </Color>
+  </Colors>
   <PageTemplates>
     <StaticPageTemplate key="MyFirstStaticTemplate">
-   
+
     </StaticPageTemplate>
   </PageTemplates>
   <Document>

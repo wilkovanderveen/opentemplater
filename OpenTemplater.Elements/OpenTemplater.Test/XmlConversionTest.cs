@@ -12,11 +12,11 @@ namespace OpenTemplater.Test
         [Test]
         public void XmlConversionTest_DoSomething()
         {
-             DocumentGenerator generator = new DocumentGenerator();
+             TemplateGenerator generator = new TemplateGenerator();
 
             string filename = Path.Combine(Environment.CurrentDirectory, @"xml\TemplateTest.xml");
 
-            generator.GenerateDocument(filename);
+            generator.GenerateTemplate(filename);
         }
     }
 }
