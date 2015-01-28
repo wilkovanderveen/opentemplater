@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="OpenTemplater"
+    targetNamespace="http://tempuri.org/OpenTemplater.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/OpenTemplater.xsd"
+    xmlns:mstns="http://tempuri.org/OpenTemplater.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Template">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Author" minOccurs ="0" type="xs:string"/>
+        <xs:element name="PageTemplates">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PageTemplate" type="PageTemplateBase" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Document" type="Document">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Document">
+    <xs:sequence>
+     
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType abstract ="true" name="PageTemplateBase">
+    <xs:attribute name="key" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="StaticPageTemplate">
+    <xs:complexContent>
+      <xs:extension base="PageTemplateBase">
+        
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DynamicPageTemplate">
+    <xs:complexContent>
+      <xs:extension base="PageTemplateBase">
+
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
