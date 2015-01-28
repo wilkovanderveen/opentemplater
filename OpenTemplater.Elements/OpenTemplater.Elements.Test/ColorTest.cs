@@ -31,15 +31,9 @@ namespace OpenTemplater.Elements.Test
         }
 
         [Test]
-        public void PMSColor_NoKey_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => new PMSColor(null, "PMS302"));
-        }
-
-        [Test]
         public void PMSColor_EnptyKey_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new PMSColor(string.Empty, "PMS302"));
+            Assert.Throws<ArgumentNullException>(() => new PMSColor(string.Empty));
         }
 
         [Test]
