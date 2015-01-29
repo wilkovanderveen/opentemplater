@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 using OpenTemplater.Elements;
 
 namespace OpenTemplater
 {
-    internal class ColorCollectionBuilder
+    public class ColorCollectionBuilder
     {
         private readonly XmlNodeList _colorNodeList;
 
@@ -32,24 +33,20 @@ namespace OpenTemplater
 
                     foreach (XmlNode colortypeNode in colorNode)
                     {
-                        XmlNode cmykColorNode = colortypeNode.SelectSingleNode("CMYK");
-                        XmlNode rgbColorNode = colortypeNode.SelectSingleNode("RGB");
-                        XmlNode pmsColorNode = colortypeNode.SelectSingleNode("PMS");
-
-                        if (pmsColorNode != null)
+                        switch (colortypeNode.LocalName)
                         {
-                            if (cmykColorNode == null && rgbColorNode == null)
-                            {
-                                throw new NotSupportedException(
-                                    "When defining PMS colors, a cmyk or a rgb color must be present.");
-                            }
-
-                            var xmlElement = pmsColorNode["name"];
-                            if (xmlElement != null)
-                            {
-                                string name = xmlElement.Value;
-                                colorSet.PMS = new PMSColor(name);
-                            }
+                            case "CMYK":
+                                colorSet.CMYK = BuildCMKColor(colortypeNode);
+                                break;
+                            case "RGB":
+                                colorSet.RGB = BuildRGBColor(colortypeNode);
+                                break;
+                            case "PMS":
+                                colorSet.PMS = BuildPMSColor(colortypeNode);
+                                break;
+                            default:
+                                throw new NotSupportedException(string.Format("Colortype {0} not supported",
+                                    colortypeNode.LocalName));
                         }
                     }
                     colors.Add(key, colorSet);
@@ -57,6 +54,48 @@ namespace OpenTemplater
             }
 
             return colors;
+        }
+
+        private PMSColor BuildPMSColor(XmlNode colortypeNode)
+        {
+            if (colortypeNode == null) throw new ArgumentNullException("colorTypeNode");
+            if (colortypeNode.Attributes == null) throw new ArgumentNullException("colorTypeNode.Attributes");
+
+            var xmlElement = colortypeNode.Attributes["name"];
+            if (xmlElement != null)
+            {
+                string name = xmlElement.Value;
+
+                return new PMSColor(name);
+            }
+            throw new ArgumentNullException("psmcolor.name");
+        }
+
+
+        private CMYKColor BuildCMKColor(XmlNode colorTypeNode)
+        {
+            if (colorTypeNode == null) throw new ArgumentNullException("colorTypeNode");
+            if (colorTypeNode.Attributes == null) throw new ArgumentNullException("colorTypeNode.Attributes");
+
+            Single cyan = Single.Parse(colorTypeNode.Attributes["cyan"].Value, CultureInfo.InvariantCulture);
+            Single magenta = Single.Parse(colorTypeNode.Attributes["magenta"].Value, CultureInfo.InvariantCulture);
+            Single yellow = Single.Parse(colorTypeNode.Attributes["yellow"].Value, CultureInfo.InvariantCulture);
+            Single black = Single.Parse(colorTypeNode.Attributes["black"].Value, CultureInfo.InvariantCulture);
+
+            return new CMYKColor(cyan, magenta, yellow, black);
+        }
+
+        private RGBColor BuildRGBColor(XmlNode colorTypeNode)
+        {
+            if (colorTypeNode == null) throw new ArgumentNullException("colorTypeNode");
+            if (colorTypeNode.Attributes == null) throw new ArgumentNullException("colorTypeNode.Attributes");
+
+            byte red = Byte.Parse(colorTypeNode.Attributes["red"].Value);
+            byte green = Byte.Parse(colorTypeNode.Attributes["green"].Value);
+            byte blue = Byte.Parse(colorTypeNode.Attributes["blue"].Value);
+
+
+            return new RGBColor(red, green, blue);
         }
     }
 }

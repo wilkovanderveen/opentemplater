@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <xs:schema id="OpenTemplater"
-    targetNamespace="http://tempuri.org/OpenTemplater.xsd"
-    elementFormDefault="qualified"
-    xmlns="http://tempuri.org/OpenTemplater.xsd"
-    xmlns:mstns="http://tempuri.org/OpenTemplater.xsd"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
+           targetNamespace="http://tempuri.org/OpenTemplater.xsd"
+           elementFormDefault="qualified"
+           xmlns="http://tempuri.org/OpenTemplater.xsd"
+           xmlns:mstns="http://tempuri.org/OpenTemplater.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="Template">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Author" minOccurs ="0" type="xs:string"/>
+        <xs:element name="Author" minOccurs="0" type="xs:string" />
         <xs:element name="Colors">
           <xs:complexType>
             <xs:sequence>
@@ -32,7 +32,7 @@
 
   <xs:complexType name="DocumentType">
     <xs:sequence>
-     
+
     </xs:sequence>
   </xs:complexType>
 
@@ -41,14 +41,50 @@
   </xs:complexType>
 
   <xs:complexType name="StaticContents">
-    
+
   </xs:complexType>
 
   <xs:complexType name="DynamicContents">
-    
+
   </xs:complexType>
 
-  <xs:complexType name="ColorType">
+  <xs:complexType name="FontType">
+    <xs:sequence>
+      
+    </xs:sequence>
     <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
+  
+  <xs:complexType name="ColorType">
+    <xs:sequence>
+      <xs:element name="CMYK" minOccurs="0">
+        <xs:complexType>
+          <xs:attribute name="cyan" type="fraction" />
+          <xs:attribute name="magenta" type="fraction" />
+          <xs:attribute name="yellow" type="fraction" />
+          <xs:attribute name="black" type="fraction" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RGB" minOccurs="0">
+        <xs:complexType>
+          <xs:attribute name="red" type="xs:unsignedByte" />
+          <xs:attribute name="green" type="xs:unsignedByte" />
+          <xs:attribute name="blue" type="xs:unsignedByte" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PMS" minOccurs="0">
+        <xs:complexType >
+          <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="key" type="xs:string" />
+  </xs:complexType>
+
+  <xs:simpleType name="fraction">
+    <xs:restriction base="xs:float">
+      <xs:maxInclusive value="1" />
+      <xs:minInclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

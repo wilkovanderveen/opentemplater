@@ -2,12 +2,10 @@ using System;
 
 namespace OpenTemplater.Elements
 {
-    public class CMYKColor : IColor
+    public class CMYKColor
     {
-        public CMYKColor(string key, Single cyan, Single magenta, Single yellow, Single black)
+        public CMYKColor(Single cyan, Single magenta, Single yellow, Single black)
         {
-            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
-
             if (cyan < 0 || cyan > 1)
             {
                 throw new ArgumentOutOfRangeException("cyan");
@@ -28,14 +26,12 @@ namespace OpenTemplater.Elements
                 throw new ArgumentOutOfRangeException("black");
             }
 
-            Key = key;
             Cyan = cyan;
             Magenta = magenta;
             Yellow = yellow;
             Black = black;
         }
 
-        public string Key { get; private set; }
         public Single Cyan { get; private set; }
         public Single Magenta { get; private set; }
         public Single Yellow { get; private set; }

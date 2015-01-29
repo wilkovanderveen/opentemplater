@@ -43,10 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorCollectionBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlConversionTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenTemplater.Elements\OpenTemplater.Elements.csproj">
+      <Project>{45C77055-02EA-449F-86A8-FC503BD74B1A}</Project>
+      <Name>OpenTemplater.Elements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenTemplater\OpenTemplater.csproj">
       <Project>{23212fab-db78-40f8-af2f-2e9139da3f49}</Project>
       <Name>OpenTemplater</Name>

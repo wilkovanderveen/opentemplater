@@ -7,7 +7,16 @@
       <RGB red="200" green="0" blue="0" />
       <PMS name="PMS302" />
     </Color>
+    <Color key="green">
+      <CMYK cyan="0" magenta="0.4" yellow="0.2" black="0"/>
+      <RGB red="0" green="200" blue ="0" />
+    </Color>
   </Colors>
+  <Fonts basePath="C:\Windows\Fonts">
+    <Font key="Arial">
+      <FontStyle style="Bold" file="arialbd.ttf" />
+    </Font>
+  </Fonts>
   <PageTemplates>
     <StaticPageTemplate key="MyFirstStaticTemplate">
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Xml;
 using NUnit.Framework;
+using OpenTemplater.Elements;
 
 namespace OpenTemplater.Test
 {
@@ -12,11 +11,11 @@ namespace OpenTemplater.Test
         [Test]
         public void XmlConversionTest_DoSomething()
         {
-             TemplateGenerator generator = new TemplateGenerator();
+            var generator = new TemplateGenerator();
 
             string filename = Path.Combine(Environment.CurrentDirectory, @"xml\TemplateTest.xml");
 
-            generator.GenerateTemplate(filename);
+            Template template = generator.GenerateTemplate(filename);
         }
     }
 }

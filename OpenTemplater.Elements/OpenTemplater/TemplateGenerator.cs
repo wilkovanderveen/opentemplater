@@ -9,14 +9,14 @@ namespace OpenTemplater
 {
     public class TemplateGenerator
     {
-        public void GenerateTemplate(string filename)
+        public Template GenerateTemplate(string filename)
         {
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
 
             ValidateXml(xmlDocument);
 
-            Template template = CreateTemplate(xmlDocument.SelectSingleNode("/Template"));
+            return CreateTemplate(xmlDocument.SelectSingleNode("/Template"));
         }
 
         private void ValidateXml(XmlDocument xmlDocument)
@@ -48,20 +48,44 @@ namespace OpenTemplater
             if (templateNode == null) throw new ArgumentNullException("templateNode");
 
             XmlNodeList colorNodeList = templateNode.SelectNodes("Colors/Color");
+               XmlNodeList fontNodeList = templateNode.SelectNodes("Fonts/Font");
 
             IDictionary<string, ColorSet> colorDictionary = CreateColors(colorNodeList);
 
-
-            DocumentElement document = CreateDocument(templateNode.SelectSingleNode("Document"));
-
-            string author = string.Empty;
-            XmlNode authorNode = templateNode.SelectSingleNode("Author");
-            if (authorNode != null)
+            XmlNode fontsCollectionNode = templateNode.SelectSingleNode("Fonts");
+            if (fontsCollectionNode != null)
             {
-                author = authorNode.InnerText;
-            }
+                if (fontsCollectionNode.Attributes != null)
+                {
+                    string basePath = fontsCollectionNode.Attributes["basePath"].Value;
+                    IDictionary<string, FontSet> fontDictionary = CreateFonts(fontNodeList, basePath);
 
-            return new Template(document, author);
+                    DocumentElement document = CreateDocument(templateNode.SelectSingleNode("Document"));
+
+                    string author = string.Empty;
+                    XmlNode authorNode = templateNode.SelectSingleNode("Author");
+                    if (authorNode != null)
+                    {
+                        author = authorNode.InnerText;
+                    }
+
+                    return new Template(document, author, colorDictionary, fontDictionary);
+                }
+               
+            }
+            throw new NullReferenceException("Cannot find fonts in template");
+
+
+
+
+        }
+
+        private IDictionary<string, FontSet> CreateFonts(XmlNodeList fontNode, string basePath)
+        {
+            
+
+            FontCollectionBuilder fontCollection = new FontCollectionBuilder(fontNode, basePath);
+            return fontCollection.Build();
         }
 
         private IDictionary<string, ColorSet> CreateColors(XmlNodeList colorNodeList)
@@ -76,12 +100,5 @@ namespace OpenTemplater
             if (documentNode == null) throw new ArgumentNullException("documentNode");
             return new DocumentElement();
         }
-    }
-
-    internal class ColorSet
-    {
-        public CMYKColor CMYK { get; set; }
-        public RGBColor RGB { get; set; }
-        public PMSColor PMS { get; set; }
     }
 }
