@@ -17,6 +17,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Fonts">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Font" type="FontType" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="basePath" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
         <xs:element name="PageTemplates">
           <xs:complexType>
             <xs:sequence>
@@ -50,10 +58,25 @@
 
   <xs:complexType name="FontType">
     <xs:sequence>
-      
+      <xs:element name="FontStyle" maxOccurs="4">
+        <xs:complexType>
+          <xs:attribute name="style" type="FontStyleType" />
+          <xs:attribute name="file" type="xs:string" />
+        </xs:complexType>
+       
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
+
+  <xs:simpleType name="FontStyleType">
+    <xs:restriction base ="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Bold" />
+      <xs:enumeration value="Italic" />
+      <xs:enumeration value="BoldItalc" />
+    </xs:restriction>
+  </xs:simpleType>
   
   <xs:complexType name="ColorType">
     <xs:sequence>

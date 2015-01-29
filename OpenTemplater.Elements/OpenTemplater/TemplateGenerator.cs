@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -9,14 +10,25 @@ namespace OpenTemplater
 {
     public class TemplateGenerator
     {
+        private XmlDocument _templateXml;
+        private XmlNamespaceManager _xmlNamespaceManager;
+
+        public TemplateGenerator()
+        {
+            _templateXml = new XmlDocument();
+            _xmlNamespaceManager = new XmlNamespaceManager(_templateXml.NameTable);
+            _xmlNamespaceManager.AddNamespace("OpenTemplater", "http://tempuri.org/OpenTemplater.xsd");
+        }
+
         public Template GenerateTemplate(string filename)
         {
-            var xmlDocument = new XmlDocument();
-            xmlDocument.Load(filename);
 
-            ValidateXml(xmlDocument);
 
-            return CreateTemplate(xmlDocument.SelectSingleNode("/Template"));
+            _templateXml.Load(filename);
+
+            ValidateXml(_templateXml);
+
+            return CreateTemplate(_templateXml.SelectSingleNode("/OpenTemplater:Template", _xmlNamespaceManager));
         }
 
         private void ValidateXml(XmlDocument xmlDocument)
@@ -39,20 +51,22 @@ namespace OpenTemplater
 
         private void ValidationCallBack(object sender, ValidationEventArgs e)
         {
-            throw new NotImplementedException();
+            Trace.Write(e);
         }
 
 
         private Template CreateTemplate(XmlNode templateNode)
         {
-            if (templateNode == null) throw new ArgumentNullException("templateNode");
+            if (templateNode == null)
+            {
+                throw new ArgumentNullException("templateNode");
+            }
 
-            XmlNodeList colorNodeList = templateNode.SelectNodes("Colors/Color");
-               XmlNodeList fontNodeList = templateNode.SelectNodes("Fonts/Font");
-
+            XmlNodeList colorNodeList = templateNode.SelectNodes("OpenTemplater:Colors/OpenTemplater:Color", _xmlNamespaceManager);
             IDictionary<string, ColorSet> colorDictionary = CreateColors(colorNodeList);
 
-            XmlNode fontsCollectionNode = templateNode.SelectSingleNode("Fonts");
+            XmlNodeList fontNodeList = templateNode.SelectNodes("OpenTemplater:Fonts/OpenTemplater:Font", _xmlNamespaceManager);
+            XmlNode fontsCollectionNode = templateNode.SelectSingleNode("OpenTemplater:Fonts", _xmlNamespaceManager);
             if (fontsCollectionNode != null)
             {
                 if (fontsCollectionNode.Attributes != null)
@@ -60,10 +74,10 @@ namespace OpenTemplater
                     string basePath = fontsCollectionNode.Attributes["basePath"].Value;
                     IDictionary<string, FontSet> fontDictionary = CreateFonts(fontNodeList, basePath);
 
-                    DocumentElement document = CreateDocument(templateNode.SelectSingleNode("Document"));
+                    DocumentElement document = CreateDocument(templateNode.SelectSingleNode("OpenTemplater:Document", _xmlNamespaceManager));
 
                     string author = string.Empty;
-                    XmlNode authorNode = templateNode.SelectSingleNode("Author");
+                    XmlNode authorNode = templateNode.SelectSingleNode("OpenTemplater:Author", _xmlNamespaceManager);
                     if (authorNode != null)
                     {
                         author = authorNode.InnerText;
@@ -71,26 +85,19 @@ namespace OpenTemplater
 
                     return new Template(document, author, colorDictionary, fontDictionary);
                 }
-               
             }
             throw new NullReferenceException("Cannot find fonts in template");
-
-
-
-
         }
 
         private IDictionary<string, FontSet> CreateFonts(XmlNodeList fontNode, string basePath)
         {
-            
-
-            FontCollectionBuilder fontCollection = new FontCollectionBuilder(fontNode, basePath);
+            var fontCollection = new FontCollectionBuilder(fontNode, basePath);
             return fontCollection.Build();
         }
 
         private IDictionary<string, ColorSet> CreateColors(XmlNodeList colorNodeList)
         {
-            ColorCollectionBuilder colorCollectionBuilder = new ColorCollectionBuilder(colorNodeList);
+            var colorCollectionBuilder = new ColorCollectionBuilder(colorNodeList);
 
             return colorCollectionBuilder.Build();
         }

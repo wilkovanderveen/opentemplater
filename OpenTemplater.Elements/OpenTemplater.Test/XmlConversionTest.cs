@@ -16,6 +16,8 @@ namespace OpenTemplater.Test
             string filename = Path.Combine(Environment.CurrentDirectory, @"xml\TemplateTest.xml");
 
             Template template = generator.GenerateTemplate(filename);
+
+            Assert.That(template.Author, Is.EqualTo("MyFirstAuthor"));
         }
     }
 }
