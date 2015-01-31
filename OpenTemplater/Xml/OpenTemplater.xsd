@@ -45,12 +45,97 @@
   </xs:complexType>
 
   <xs:complexType name="PageTemplate">
+    <xs:sequence>
+      <xs:element name="StaticContent" type="StaticContentType" />
+    </xs:sequence>
+    <xs:attribute name="key" type="xs:string" />
+    <xs:attribute name="width" type="UnitType" />
+    <xs:attribute name="height" type="UnitType" />
+  </xs:complexType>
+
+  <xs:simpleType name="UnitType">
+    <xs:restriction base="xs:string" >
+      
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="StaticContentType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="Rectangle" type="RectangleElementType" />
+      <xs:element name="Elipse" type="ElipseElementType" />
+      <xs:element name="Line" type="LineElementType" />
+      <xs:element name="Image" type="ImageElementType" />
+      <xs:element name="Text" type="TextElementType" />
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="RectangleElementType">
+   <xs:sequence>
+      <xs:element name="Layout" type="ComplexLayoutType" />
+    </xs:sequence>
     <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
 
-  <xs:complexType name="StaticContents">
+  <xs:complexType name="ComplexLayoutType">
+    <xs:sequence>
+      <xs:element name="X">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="relation" minOccurs="0">
+              <xs:complexType>
+                <xs:attribute name="element" type="xs:string" />
+                <xs:attribute name="side">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="left" />
+                      <xs:enumeration value="right" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="value" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Y">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="relation" minOccurs="0">
+              <xs:complexType>
+                <xs:attribute name="element" type="xs:string" />
+                <xs:attribute name="side">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="top" />
+                      <xs:enumeration value="bottom" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="value" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Width" />
+     <xs:element name="Height" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ElipseElementType">
 
   </xs:complexType>
+  <xs:complexType name="LineElementType">
+
+  </xs:complexType>
+  <xs:complexType name="ImageElementType">
+
+  </xs:complexType>
+  <xs:complexType name="TextElementType">
+
+  </xs:complexType>
+
 
   <xs:complexType name="DynamicContents">
 
@@ -63,21 +148,21 @@
           <xs:attribute name="style" type="FontStyleType" />
           <xs:attribute name="file" type="xs:string" />
         </xs:complexType>
-       
+
       </xs:element>
     </xs:sequence>
     <xs:attribute name="key" type="xs:string" />
   </xs:complexType>
 
   <xs:simpleType name="FontStyleType">
-    <xs:restriction base ="xs:string">
+    <xs:restriction base="xs:string">
       <xs:enumeration value="Normal" />
       <xs:enumeration value="Bold" />
       <xs:enumeration value="Italic" />
       <xs:enumeration value="BoldItalc" />
     </xs:restriction>
   </xs:simpleType>
-  
+
   <xs:complexType name="ColorType">
     <xs:sequence>
       <xs:element name="CMYK" minOccurs="0">
@@ -96,8 +181,8 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="PMS" minOccurs="0">
-        <xs:complexType >
-          <xs:attribute name="name" type="xs:string"/>
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" />
         </xs:complexType>
       </xs:element>
     </xs:sequence>

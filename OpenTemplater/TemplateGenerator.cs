@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
+using OpenTemplater.Builders;
 using OpenTemplater.Elements;
 
 namespace OpenTemplater
@@ -22,8 +23,6 @@ namespace OpenTemplater
 
         public Template GenerateTemplate(string filename)
         {
-
-
             _templateXml.Load(filename);
 
             ValidateXml(_templateXml);

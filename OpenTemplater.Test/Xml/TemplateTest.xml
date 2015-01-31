@@ -18,9 +18,18 @@
     </ot:Font>
   </ot:Fonts>
   <ot:PageTemplates>
-    <ot:StaticPageTemplate key="MyFirstStaticTemplate">
-
-    </ot:StaticPageTemplate>
+    <ot:PageTemplate key="MyFirstStaticTemplate" width="210mm" height="297mm">
+      <ot:StaticContent>
+        <ot:Rectangle key="Rectangle1" >
+          <ot:Layout>
+            <ot:X value="20mm" />
+            <ot:Y value="20mm" />
+            <ot:Width value="170mm" />
+            <ot:Height value="249mm" />
+          </ot:Layout>
+        </ot:Rectangle>
+      </ot:StaticContent>
+    </ot:PageTemplate>
   </ot:PageTemplates>
   <ot:Document>
     <ot:Pages>

@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorCollectionBuilder.cs" />
-    <Compile Include="FontCollectionBuilder.cs" />
+    <Compile Include="Builders\ColorCollectionBuilder.cs" />
+    <Compile Include="Builders\FontCollectionBuilder.cs" />
+    <Compile Include="Services\LayoutService.cs" />
     <Compile Include="TemplateGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,7 @@
       <Name>OpenTemplater.Elements</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

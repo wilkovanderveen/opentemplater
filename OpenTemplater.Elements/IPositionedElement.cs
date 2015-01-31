@@ -7,5 +7,6 @@
     {
         float XPosition { get; }
         float YPosition { get; }
+        byte ZOrder { get; }
     }
 }
