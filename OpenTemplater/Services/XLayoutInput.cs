@@ -4,6 +4,6 @@
     {
         public float Value { get; set; }
         public string OtherElementKey { get; set; }
-        public XSide OtherElementSide { get; set; }
+        public XSide? OtherElementSide { get; set; }
     }
 }

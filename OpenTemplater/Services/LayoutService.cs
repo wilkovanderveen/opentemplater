@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OpenTemplater.Elements.Modules;
 
 namespace OpenTemplater.Services
@@ -14,7 +15,7 @@ namespace OpenTemplater.Services
             _layoutInputs = layoutInputs;
         }
 
-        public void ProcesElements()
+        public IDictionary<string, Layout> ProcesElements()
         {
             foreach (IElementLayoutInput layoutInput in _layoutInputs.Values)
             {
@@ -23,6 +24,8 @@ namespace OpenTemplater.Services
                     _processedLayouts.Add(layoutInput.Key, GetPositions(layoutInput));
                 }
             }
+
+            return _processedLayouts;
         }
 
         private Layout GetPositions(IElementLayoutInput layoutInput)
@@ -35,12 +38,12 @@ namespace OpenTemplater.Services
                 layoutInput.YLayoutInput.PageHeight);
 
             float width = GetWidth(layoutInput.WidthInput.OtherElementKey, layoutInput.WidthInput.Value);
-            float height = GetHeight(layoutInput.HeightInput.OtherElementKey, layoutInput.HeightInput.Value);
+            float height = GetHeight(layoutInput.HeightInput.OtherElementKey, layoutInput.HeightInput.Value, layoutInput.HeightInput.MaxHeight);
 
             return new Layout(xPosition, yPosition, width, height);
         }
 
-        private float GetHeight(string otherElementKey, float value)
+        private float GetHeight(string otherElementKey, float value, float maxHeight)
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
@@ -52,11 +55,11 @@ namespace OpenTemplater.Services
                     {
                         Layout processedLayout = _processedLayouts[otherElementKey];
 
-                        return processedLayout.Height + value;
+                        return Math.Min(processedLayout.Height + value, maxHeight);
                     }
                     //  Process the related element so the position can be calculated.
                     _processedLayouts.Add(otherElementKey, GetPositions(otherElement));
-                    return GetHeight(otherElementKey, value);
+                    return GetHeight(otherElementKey, value, maxHeight);
                 }
                 throw new KeyNotFoundException(string.Format("Other element with key {0} not found.", otherElementKey));
             }
@@ -86,7 +89,7 @@ namespace OpenTemplater.Services
             return value;
         }
 
-        private float GetYPosition(string otherElementKey, float value, YSide otherElementSide, bool xAxisInverted,
+        private float GetYPosition(string otherElementKey, float value, YSide? otherElementSide, bool xAxisInverted,
             float pageHeight)
         {
             if (!string.IsNullOrEmpty(otherElementKey))
@@ -100,8 +103,8 @@ namespace OpenTemplater.Services
                         Layout processedLayout = _processedLayouts[otherElementKey];
 
                         return otherElementSide == YSide.Top
-                            ? GetYValue(xAxisInverted, value + processedLayout.YPosition, pageHeight)
-                            : GetYValue(xAxisInverted, value + processedLayout.YPosition + processedLayout.Height,
+                            ? GetYValue(xAxisInverted, value + (xAxisInverted ? pageHeight - processedLayout.YPosition : processedLayout.YPosition), pageHeight)
+                            : GetYValue(xAxisInverted, value + (xAxisInverted ? pageHeight - processedLayout.YPosition : processedLayout.YPosition) + processedLayout.Height,
                                 pageHeight);
                     }
                     //  Process the related element so the position can be calculated.
@@ -110,7 +113,7 @@ namespace OpenTemplater.Services
                 }
                 throw new KeyNotFoundException(string.Format("Other element with key {0} not found.", otherElementKey));
             }
-            return value;
+            return GetYValue(xAxisInverted, value, pageHeight);
         }
 
         private float GetYValue(bool xAxisInverted, float y, float pageHeight)
@@ -118,7 +121,7 @@ namespace OpenTemplater.Services
             return xAxisInverted ? pageHeight - y : y;
         }
 
-        private float GetXPosition(string otherElementKey, float value, XSide side)
+        private float GetXPosition(string otherElementKey, float value, XSide? side)
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
@@ -142,5 +145,10 @@ namespace OpenTemplater.Services
             }
             return value;
         }
+    }
+
+    public class ElementProcessingFactory
+    {
+        
     }
 }

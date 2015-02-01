@@ -42,7 +42,15 @@
   <ItemGroup>
     <Compile Include="Builders\ColorCollectionBuilder.cs" />
     <Compile Include="Builders\FontCollectionBuilder.cs" />
+    <Compile Include="Services\HeightInput.cs" />
+    <Compile Include="Services\IElementLayoutInput.cs" />
     <Compile Include="Services\LayoutService.cs" />
+    <Compile Include="Services\RectangleLayoutInput.cs" />
+    <Compile Include="Services\WidthInput.cs" />
+    <Compile Include="Services\XLayoutInput.cs" />
+    <Compile Include="Services\XSide.cs" />
+    <Compile Include="Services\YLayoutInput.cs" />
+    <Compile Include="Services\YSide.cs" />
     <Compile Include="TemplateGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
