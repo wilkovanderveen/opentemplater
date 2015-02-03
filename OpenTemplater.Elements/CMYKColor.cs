@@ -2,7 +2,7 @@ using System;
 
 namespace OpenTemplater.Elements
 {
-    public class CMYKColor
+    public class CMYKColor : IColor
     {
         public CMYKColor(Single cyan, Single magenta, Single yellow, Single black)
         {

@@ -11,8 +11,8 @@ namespace OpenTemplater
 {
     public class TemplateGenerator
     {
-        private XmlDocument _templateXml;
-        private XmlNamespaceManager _xmlNamespaceManager;
+        private readonly XmlDocument _templateXml;
+        private readonly XmlNamespaceManager _xmlNamespaceManager;
 
         public TemplateGenerator()
         {
@@ -27,7 +27,11 @@ namespace OpenTemplater
 
             ValidateXml(_templateXml);
 
-            return CreateTemplate(_templateXml.SelectSingleNode("/OpenTemplater:Template", _xmlNamespaceManager));
+            Template tempate = CreateTemplate(_templateXml.SelectSingleNode("/OpenTemplater:Template", _xmlNamespaceManager));
+
+
+
+            return tempate;
         }
 
         private void ValidateXml(XmlDocument xmlDocument)

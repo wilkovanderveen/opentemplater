@@ -1,6 +1,6 @@
 namespace OpenTemplater.Elements
 {
-    public class RGBColor
+    public class RGBColor : IColor
     {
         public RGBColor(byte red, byte green, byte blue)
         {

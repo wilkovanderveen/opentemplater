@@ -42,10 +42,24 @@
   <ItemGroup>
     <Compile Include="Builders\ColorCollectionBuilder.cs" />
     <Compile Include="Builders\FontCollectionBuilder.cs" />
+    <Compile Include="Services\ColorService.cs" />
+    <Compile Include="Services\ColorType.cs" />
+    <Compile Include="Services\ElementCreationService.cs" />
+    <Compile Include="Services\ElementInputFactory.cs" />
+    <Compile Include="Services\CreationStrategies\ElipseCreationStrategy.cs" />
     <Compile Include="Services\HeightInput.cs" />
+    <Compile Include="Services\IElementCreationInput.cs" />
     <Compile Include="Services\IElementLayoutInput.cs" />
+    <Compile Include="Services\CreationStrategies\ImageCreationStrategy.cs" />
     <Compile Include="Services\LayoutService.cs" />
+    <Compile Include="Services\CreationStrategies\LineCreationStrategy.cs" />
+    <Compile Include="Services\PageCreationService.cs" />
+    <Compile Include="Services\PageTemplateInput.cs" />
+    <Compile Include="Services\RectangleCreationInput.cs" />
+    <Compile Include="Services\CreationStrategies\RectangleCreationStrategy.cs" />
     <Compile Include="Services\RectangleLayoutInput.cs" />
+    <Compile Include="Services\CreationStrategies\TextCreationStrategy.cs" />
+    <Compile Include="Services\UnitConversionService.cs" />
     <Compile Include="Services\WidthInput.cs" />
     <Compile Include="Services\XLayoutInput.cs" />
     <Compile Include="Services\XSide.cs" />

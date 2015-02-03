@@ -74,6 +74,8 @@
       <xs:element name="Layout" type="ComplexLayoutType" />
     </xs:sequence>
     <xs:attribute name="key" type="xs:string" />
+    <xs:attribute name="borderColor" type="xs:string" use="optional" />
+    <xs:attribute name="fillColor" type="xs:string" use="optional" />
   </xs:complexType>
 
   <xs:complexType name="ComplexLayoutType">
@@ -138,7 +140,9 @@
 
 
   <xs:complexType name="DynamicContents">
-
+    <xs:attribute name="topBoundary" type="UnitType" use="optional" />
+    <xs:attribute name="bottomBoundary" type="UnitType" use="optional" />
+    <xs:attribute name="onOverflow" type="xs:string" use="optional" />
   </xs:complexType>
 
   <xs:complexType name="FontType">

@@ -2,7 +2,7 @@ using System;
 
 namespace OpenTemplater.Elements
 {
-    public class PMSColor
+    public class PMSColor : IColor
     {
         public PMSColor(string name)
         {

@@ -29,6 +29,16 @@
           </ot:Layout>
         </ot:Rectangle>
       </ot:StaticContent>
+      <ot:DynamicContent topBoundary="20mm" bottomBoundary="200mm" onOverflow="MyFirstStaticTemplate">
+        <ot:Rectangle key="Rectangle1" >
+          <ot:Layout>
+            <ot:X value="20mm" />
+            <ot:Y value="20mm" />
+            <ot:Width value="170mm" />
+            <ot:Height value="249mm" />
+          </ot:Layout>
+        </ot:Rectangle>
+      </ot:DynamicContent>
     </ot:PageTemplate>
   </ot:PageTemplates>
   <ot:Document>
