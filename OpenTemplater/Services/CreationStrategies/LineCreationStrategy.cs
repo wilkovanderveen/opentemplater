@@ -3,9 +3,13 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater.Services.CreationStrategies
 {
-    public class LineCreationStrategy : IElementCreationStrategy<LineCreationInput, LineElement>
+    public class LineCreationStrategy : BaseElementCreationStrategy<LineCreationInput, LineElement>
     {
-        public LineElement GetElement(LineCreationInput input)
+        public LineCreationStrategy(DocumentContext documentContext, LineCreationInput input) : base(documentContext, input)
+        {
+        }
+
+        public override LineElement GetElement()
         {
             throw new NotImplementedException();
         }

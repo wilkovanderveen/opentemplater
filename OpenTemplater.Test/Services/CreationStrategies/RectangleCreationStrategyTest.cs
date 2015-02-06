@@ -22,6 +22,12 @@ namespace OpenTemplater.Test.Services.CreationStrategies
             var colorService = new ColorService(ColorType.CMYK, colorSets);
             var unitConversionService = new UnitConversionService();
 
+            IDictionary<string, FontSet> fontDictionary = new Dictionary<string, FontSet>();
+            fontDictionary.Add("myfont", new FontSet());
+
+            IFontService fontService = new FontService(fontDictionary);
+            var documentContext = new DocumentContext(colorService, fontService);
+
             var rectangleCreationInput = new RectangleCreationInput
             {
                 BorderColor = "blue",
@@ -31,8 +37,9 @@ namespace OpenTemplater.Test.Services.CreationStrategies
                 ZOrder = "1"
             };
 
-            var rectangleCreationStrategy = new RectangleCreationStrategy(colorService, unitConversionService);
-            RectangleElement result = rectangleCreationStrategy.GetElement(rectangleCreationInput);
+            var rectangleCreationStrategy = new RectangleCreationStrategy(documentContext, unitConversionService,
+                rectangleCreationInput);
+            RectangleElement result = rectangleCreationStrategy.GetElement();
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.BorderColor, Is.EqualTo(blueColor));

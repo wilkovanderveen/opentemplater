@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace OpenTemplater.Services
@@ -19,7 +20,7 @@ namespace OpenTemplater.Services
 
                 float multiplier = GetMultiplier(unit);
 
-                return multiplier*float.Parse(value);
+                return multiplier*float.Parse(value, CultureInfo.InvariantCulture);
             }
             throw new NotSupportedException(string.Format("Invalid unit format for {0}", unitValue));
         }
@@ -27,7 +28,7 @@ namespace OpenTemplater.Services
         private float GetMultiplier(string unit)
         {
             if (unit == null) throw new ArgumentNullException("unit");
-            if (unit.Equals("mm")) return (25.4f/72);
+            if (unit.Equals("mm")) return (72/25.4f);
             if (unit.Equals("inch")) return (72);
             if (unit.Equals("pt")) return 1;
 

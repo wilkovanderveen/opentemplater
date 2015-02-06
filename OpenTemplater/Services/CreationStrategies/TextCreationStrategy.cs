@@ -3,9 +3,13 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater.Services.CreationStrategies
 {
-    public class TextCreationStrategy : IElementCreationStrategy<TextCreationInput, TextElement>
+    public class TextCreationStrategy : BaseElementCreationStrategy<TextCreationInput, TextElement>
     {
-        public TextElement GetElement(TextCreationInput elementCreationInput)
+        public TextCreationStrategy(DocumentContext documentContext, TextCreationInput input) : base(documentContext, input)
+        {
+        }
+
+        public override TextElement GetElement()
         {
             throw new NotImplementedException();
         }

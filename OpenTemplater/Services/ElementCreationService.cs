@@ -6,81 +6,38 @@ namespace OpenTemplater.Services
 {
     public class ElementCreationService
     {
-        private readonly IColorService _colorService;
         private readonly IUnitConversionService _valueConverter;
+        private readonly DocumentContext _documentContext;
 
-        public ElementCreationService(IColorService colorService, IUnitConversionService valueConverter)
+        public ElementCreationService(IUnitConversionService valueConverter, DocumentContext documentContext)
         {
-            _colorService = colorService;
             _valueConverter = valueConverter;
+            _documentContext = documentContext;
         }
 
-        public IElementCreationStrategy GetStrategy(IElementCreationInput elementCreationInput)
+        public IElement GetStrategy(IElementCreationInput elementCreationInput)
         {
             switch (elementCreationInput.Name.ToLower())
             {
                 case "rectangle":
-                    return new RectangleCreationStrategy(_colorService, _valueConverter);
+                    RectangleCreationInput rectangleCreationInput = elementCreationInput as RectangleCreationInput;
+                    return new RectangleCreationStrategy(_documentContext, _valueConverter, rectangleCreationInput).GetElement();
                 case "elipse":
-                    return new ElipseCreationStrategy();
+                    ElipseCreationInput elipseCreationInput = elementCreationInput as ElipseCreationInput;
+                    return new ElipseCreationStrategy(_documentContext, elipseCreationInput).GetElement();
                 case "text":
-                    return new TextCreationStrategy();
+                    TextCreationInput textCreationInput  = elementCreationInput as TextCreationInput;
+                    return new TextCreationStrategy(_documentContext, textCreationInput).GetElement();
                 case "image":
-                    return new ImageCreationStrategy();
+                    ImageCreationInput imageCreationInput = elementCreationInput as ImageCreationInput;
+                    return new ImageCreationStrategy(_documentContext, imageCreationInput).GetElement();
                 case "line":
-                    return new LineCreationStrategy();
+                    LineCreationInput lineCreationInput = elementCreationInput as LineCreationInput;
+                    return new LineCreationStrategy(_documentContext, lineCreationInput).GetElement();
                 default:
                     throw new NotSupportedException(string.Format("Element type {0} is not supported",
                         elementCreationInput.Name.ToLower()));
             }
         }
-    }
-
-    public class LineCreationInput : IElementCreationInput
-    {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public IElementLayoutInput LayoutInput { get; private set; }
-    }
-
-    public class ImageCreationInput : IElementCreationInput
-    {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public IElementLayoutInput LayoutInput { get; private set; }
-    }
-
-    public class TextCreationInput : IElementCreationInput
-    {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public IElementLayoutInput LayoutInput { get; private set; }
-    }
-
-    public class ElipseCreationInput : IElementCreationInput
-    {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public IElementLayoutInput LayoutInput { get; private set; }
-    }
-
-    public interface IUnitConversionService
-    {
-        float GetValue(string unitValue);
-    }
-
-    public interface IColorService
-    {
-        IColor GetColor(string key);
-    }
-
-    public interface IElementCreationStrategy<in TInput, out TOutput> : IElementCreationStrategy where TInput : IElementCreationInput where TOutput : IElement
-    {
-        TOutput GetElement(TInput elementCreationInput);
-    }
-
-    public interface IElementCreationStrategy
-    {
-        
     }
 }

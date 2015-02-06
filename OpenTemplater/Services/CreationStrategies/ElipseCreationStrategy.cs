@@ -3,9 +3,13 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater.Services.CreationStrategies
 {
-    public class ElipseCreationStrategy : IElementCreationStrategy<ElipseCreationInput, ElipseElement>
+    public class ElipseCreationStrategy : BaseElementCreationStrategy<ElipseCreationInput, ElipseElement>
     {
-        public ElipseElement GetElement(ElipseCreationInput elementCreationInput)
+        public ElipseCreationStrategy(DocumentContext documentContext, ElipseCreationInput input) : base(documentContext, input)
+        {
+        }
+
+        public override ElipseElement GetElement()
         {
             throw new NotImplementedException();
         }

@@ -3,9 +3,13 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater.Services.CreationStrategies
 {
-    public class ImageCreationStrategy : IElementCreationStrategy<ImageCreationInput, ImageElement>
+    public class ImageCreationStrategy : BaseElementCreationStrategy<ImageCreationInput, ImageElement>
     {
-        public ImageElement GetElement(ImageCreationInput elementCreationInput)
+        public ImageCreationStrategy(DocumentContext documentContext, ImageCreationInput input) : base(documentContext, input)
+        {
+        }
+
+        public override ImageElement GetElement()
         {
             throw new NotImplementedException();
         }

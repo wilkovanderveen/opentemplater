@@ -3,26 +3,24 @@ using OpenTemplater.Elements;
 
 namespace OpenTemplater.Services.CreationStrategies
 {
-    public class RectangleCreationStrategy : IElementCreationStrategy<RectangleCreationInput, RectangleElement>
+    public class RectangleCreationStrategy : BaseElementCreationStrategy<RectangleCreationInput, RectangleElement>
     {
-        private readonly IColorService _colorService;
         private readonly IUnitConversionService _unitConversionService;
 
-        public RectangleCreationStrategy(IColorService colorService, IUnitConversionService unitConversionService)
+        public RectangleCreationStrategy(DocumentContext documentContext, IUnitConversionService unitConversionService, RectangleCreationInput input) : base(documentContext, input)
         {
-            _colorService = colorService;
             _unitConversionService = unitConversionService;
         }
 
-        public RectangleElement GetElement(RectangleCreationInput elementCreationInput)
+        public override RectangleElement GetElement()
         {
             var rectangle = new RectangleElement
             {
-                Key = elementCreationInput.Key,
-                BorderColor = _colorService.GetColor(elementCreationInput.BorderColor),
-                BorderWidth = _unitConversionService.GetValue(elementCreationInput.BorderWidth),
-                Color = _colorService.GetColor(elementCreationInput.FillColor),
-                ZOrder = Byte.Parse(elementCreationInput.ZOrder)
+                Key = Input.Key,
+                BorderColor = DocumentContext.ColorService.GetColor(Input.BorderColor),
+                BorderWidth = _unitConversionService.GetValue(Input.BorderWidth),
+                Color = DocumentContext.ColorService.GetColor(Input.FillColor),
+                ZOrder = Byte.Parse(Input.ZOrder)
             };
 
             return rectangle;
