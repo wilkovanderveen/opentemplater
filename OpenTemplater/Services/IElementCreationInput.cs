@@ -5,6 +5,5 @@
         string Key { get; }
         string Name { get; }
         string ZOrder { get; }
-        IElementLayoutInput LayoutInput { get; }
     }
 }

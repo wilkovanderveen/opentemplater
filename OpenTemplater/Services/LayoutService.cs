@@ -6,10 +6,10 @@ namespace OpenTemplater.Services
 {
     public class LayoutService
     {
-        private readonly IDictionary<string, IElementLayoutInput> _layoutInputs;
+        private readonly IDictionary<string, IElementLayoutCreationInput> _layoutInputs;
         private readonly IDictionary<string, Layout> _processedLayouts;
 
-        public LayoutService(IDictionary<string, IElementLayoutInput> layoutInputs)
+        public LayoutService(IDictionary<string, IElementLayoutCreationInput> layoutInputs)
         {
             _processedLayouts = new Dictionary<string, Layout>();
             _layoutInputs = layoutInputs;
@@ -17,7 +17,7 @@ namespace OpenTemplater.Services
 
         public IDictionary<string, Layout> ProcesElements()
         {
-            foreach (IElementLayoutInput layoutInput in _layoutInputs.Values)
+            foreach (IElementLayoutCreationInput layoutInput in _layoutInputs.Values)
             {
                 if (!_processedLayouts.ContainsKey(layoutInput.Key))
                 {
@@ -28,17 +28,17 @@ namespace OpenTemplater.Services
             return _processedLayouts;
         }
 
-        private Layout GetPositions(IElementLayoutInput layoutInput)
+        private Layout GetPositions(IElementLayoutCreationInput layoutCreationInput)
         {
-            float xPosition = GetXPosition(layoutInput.XLayoutInput.OtherElementKey, layoutInput.XLayoutInput.Value,
-                layoutInput.XLayoutInput.OtherElementSide);
+            float xPosition = GetXPosition(layoutCreationInput.XLayoutInput.OtherElementKey, layoutCreationInput.XLayoutInput.Value,
+                layoutCreationInput.XLayoutInput.OtherElementSide);
 
-            float yPosition = GetYPosition(layoutInput.YLayoutInput.OtherElementKey, layoutInput.YLayoutInput.Value,
-                layoutInput.YLayoutInput.OtherElementSide, layoutInput.YLayoutInput.XAxisInverted,
-                layoutInput.YLayoutInput.PageHeight);
+            float yPosition = GetYPosition(layoutCreationInput.YLayoutInput.OtherElementKey, layoutCreationInput.YLayoutInput.Value,
+                layoutCreationInput.YLayoutInput.OtherElementSide, layoutCreationInput.YLayoutInput.XAxisInverted,
+                layoutCreationInput.YLayoutInput.PageHeight);
 
-            float width = GetWidth(layoutInput.WidthInput.OtherElementKey, layoutInput.WidthInput.Value);
-            float height = GetHeight(layoutInput.HeightInput.OtherElementKey, layoutInput.HeightInput.Value, layoutInput.HeightInput.MaxHeight);
+            float width = GetWidth(layoutCreationInput.WidthInput.OtherElementKey, layoutCreationInput.WidthInput.Value);
+            float height = GetHeight(layoutCreationInput.HeightInput.OtherElementKey, layoutCreationInput.HeightInput.Value, layoutCreationInput.HeightInput.MaxHeight);
 
             return new Layout(xPosition, yPosition, width, height);
         }
@@ -47,7 +47,7 @@ namespace OpenTemplater.Services
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
-                IElementLayoutInput otherElement;
+                IElementLayoutCreationInput otherElement;
                 if (_layoutInputs.TryGetValue(otherElementKey, out otherElement))
                 {
                     // First check if refered layout is already been processed, if so get the calculated values.
@@ -70,7 +70,7 @@ namespace OpenTemplater.Services
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
-                IElementLayoutInput otherElement;
+                IElementLayoutCreationInput otherElement;
                 if (_layoutInputs.TryGetValue(otherElementKey, out otherElement))
                 {
                     // First check if refered layout is already been processed, if so get the calculated values.
@@ -94,7 +94,7 @@ namespace OpenTemplater.Services
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
-                IElementLayoutInput otherElement;
+                IElementLayoutCreationInput otherElement;
                 if (_layoutInputs.TryGetValue(otherElementKey, out otherElement))
                 {
                     // First check if refered layout is already been processed, if so get the calculated values.
@@ -125,7 +125,7 @@ namespace OpenTemplater.Services
         {
             if (!string.IsNullOrEmpty(otherElementKey))
             {
-                IElementLayoutInput otherElement;
+                IElementLayoutCreationInput otherElement;
                 if (_layoutInputs.TryGetValue(otherElementKey, out otherElement))
                 {
                     // First check if refered layout is already been processed, if so get the calculated values.

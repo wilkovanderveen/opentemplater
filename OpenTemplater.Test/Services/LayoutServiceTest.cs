@@ -11,9 +11,9 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToBottom()
         {
-            IDictionary<string, IElementLayoutInput> layoutInputs = new Dictionary<string, IElementLayoutInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutInput
+            var firstRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -22,7 +22,7 @@ namespace OpenTemplater.Test.Services
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutInput
+            var secondRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MySecondRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -59,9 +59,9 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToLeft()
         {
-            IDictionary<string, IElementLayoutInput> layoutInputs = new Dictionary<string, IElementLayoutInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutInput
+            var firstRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -70,7 +70,7 @@ namespace OpenTemplater.Test.Services
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutInput
+            var secondRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MySecondRectangle",
                 XLayoutInput =
@@ -100,9 +100,9 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToRight()
         {
-            IDictionary<string, IElementLayoutInput> layoutInputs = new Dictionary<string, IElementLayoutInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutInput
+            var firstRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -111,7 +111,7 @@ namespace OpenTemplater.Test.Services
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutInput
+            var secondRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MySecondRectangle",
                 XLayoutInput =
@@ -141,9 +141,9 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToTop()
         {
-            IDictionary<string, IElementLayoutInput> layoutInputs = new Dictionary<string, IElementLayoutInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutInput
+            var firstRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -152,7 +152,7 @@ namespace OpenTemplater.Test.Services
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutInput
+            var secondRectangleInput = new RectangleLayoutCreationInput
             {
                 Key = "MySecondRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
@@ -189,9 +189,9 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void SimpleLayoutConversion_X20_Y20_W20_H20_XaxisInverted_Result_X20_Y180_W20_H20()
         {
-            IDictionary<string, IElementLayoutInput> layoutInputs = new Dictionary<string, IElementLayoutInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
 
-            var rectangleLayout = new RectangleLayoutInput
+            var rectangleLayout = new RectangleLayoutCreationInput
             {
                 Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},

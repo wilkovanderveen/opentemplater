@@ -8,10 +8,16 @@ namespace OpenTemplater
 {
     public class DocumentContext
     {
+        private readonly IPagingService _pagingService;
         private readonly IDictionary<string, IDictionary<string, IElement>> _pageInputs;
 
-        public DocumentContext(IColorService colorService, IFontService fontService)
+        public DocumentContext(IColorService colorService, IFontService fontService, IPagingService pagingService)
         {
+            if (colorService == null) throw new ArgumentNullException("colorService");
+            if (fontService == null) throw new ArgumentNullException("fontService");
+            if (pagingService == null) throw new ArgumentNullException("pagingService");
+
+            PagingService = pagingService;
             ColorService = colorService;
             FontService = fontService;
             _pageInputs = new Dictionary<string, IDictionary<string, IElement>>();
@@ -20,7 +26,7 @@ namespace OpenTemplater
         public IColorService ColorService { get; private set; }
 
         public IFontService FontService { get; private set; }
-        public IPagingService PagingService { get; set; }
+        public IPagingService PagingService { get; private set; }
 
         public void AddPage(string key)
         {
@@ -36,10 +42,5 @@ namespace OpenTemplater
             IDictionary<string, IElement> currentPage = _pageInputs[pageKey];
             currentPage.Add(element.Key, element);
         }
-    }
-
-    public interface IPagingService
-    {
-        IList<PageElement> ExtractPages(DynamicContentInput dynamicContentInput);
     }
 }

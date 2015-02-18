@@ -31,27 +31,23 @@ namespace OpenTemplater.Services
                 };
 
                 // Complex Layout
-                RectangleLayoutInput layoutInput = GetLayoutInput(rectangleCreationInput.Key,
+                 SetLayout(rectangleCreationInput,
                     rectangleElementNode.SelectSingleNode("Layout", _xmlNamespaceManager));
 
-                rectangleCreationInput.LayoutInput = layoutInput;
+          
                 return rectangleCreationInput;
             }
             throw new ArgumentNullException("rectangleElementNode.Attributes");
         }
 
-        private RectangleLayoutInput GetLayoutInput(string key, XmlNode layoutNode)
+        private void SetLayout(RectangleCreationInput creationInput, XmlNode layoutNode)
         {
             if (layoutNode == null) throw new ArgumentNullException("layoutNode");
-            var layoutInput = new RectangleLayoutInput
-            {
-                Key = key,
-                HeightInput = GetHeightInput(layoutNode.SelectSingleNode("Height", _xmlNamespaceManager)),
-                WidthInput = GetWidthInput(layoutNode.SelectSingleNode("Width", _xmlNamespaceManager)),
-                XLayoutInput = GetXLayoutInput(layoutNode.SelectSingleNode("X", _xmlNamespaceManager)),
-                YLayoutInput = GetYLayoutInput(layoutNode.SelectSingleNode("Y", _xmlNamespaceManager))
-            };
-            return layoutInput;
+
+            creationInput.HeightInput = GetHeightInput(layoutNode.SelectSingleNode("Height", _xmlNamespaceManager));
+            creationInput.WidthInput = GetWidthInput(layoutNode.SelectSingleNode("Width", _xmlNamespaceManager));
+            creationInput.XLayoutInput = GetXLayoutInput(layoutNode.SelectSingleNode("X", _xmlNamespaceManager));
+            creationInput.YLayoutInput = GetYLayoutInput(layoutNode.SelectSingleNode("Y", _xmlNamespaceManager));
         }
 
         private XLayoutInput GetXLayoutInput(XmlNode xPositionNode)

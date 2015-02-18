@@ -6,13 +6,17 @@ namespace OpenTemplater.Services
     {
         public PageTemplateInput()
         {
-            StaticElementInputs = new List<IElementCreationInput>();
-            DynamicElementInputs = new List<IElementCreationInput>();
-        }
         
+        }
+
         public string Key { get; set; }
 
-        public IList<IElementCreationInput> StaticElementInputs { get; private set; }
-        public IList<IElementCreationInput> DynamicElementInputs { get; private set; }
+       
+        public DynamicContentInput DynamicContent { get; set; }
+        public StaticContentInput StaticContent { get; set; }
+        public string Width { get; set; }
+        public string Height { get; set; }
+        public string BleedSpace { get; set; }
+        public string SlugSpace { get; set; }
     }
 }

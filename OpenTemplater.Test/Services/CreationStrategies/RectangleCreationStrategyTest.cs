@@ -26,7 +26,7 @@ namespace OpenTemplater.Test.Services.CreationStrategies
             fontDictionary.Add("myfont", new FontSet());
 
             IFontService fontService = new FontService(fontDictionary);
-            var documentContext = new DocumentContext(colorService, fontService);
+            var documentContext = new DocumentContext(colorService, fontService, new PagingService());
 
             var rectangleCreationInput = new RectangleCreationInput
             {

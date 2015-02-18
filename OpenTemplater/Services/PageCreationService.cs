@@ -7,11 +7,11 @@ namespace OpenTemplater.Services
 {
     public class PageCreationService
     {
-        private readonly ElementCreationService _elementCreationService;
+        private readonly ElementCreationFactory _elementCreationFactory;
 
-        public PageCreationService(ElementCreationService elementCreationService)
+        public PageCreationService(ElementCreationFactory elementCreationFactory)
         {
-            _elementCreationService = elementCreationService;
+            _elementCreationFactory = elementCreationFactory;
         }
 
         public IEnumerable<PageElement> CreatePagesFromInput(IEnumerable<PageTemplateInput> pageTemplateInputList)
@@ -29,7 +29,7 @@ namespace OpenTemplater.Services
         {
             PageElement page = new PageElement
             {
-                Elements = GetStaticContents(pageTemplateInput.Key, pageTemplateInput.StaticElementInputs).ToList()
+                Elements = GetStaticContents(pageTemplateInput.Key, pageTemplateInput.StaticContent.Elements).ToList()
             };
 
             return page;
@@ -45,7 +45,7 @@ namespace OpenTemplater.Services
 
             foreach (IElementCreationInput elementCreationInput in staticElementInputs)
             {
-                _elementCreationService.GetStrategy(elementCreationInput);
+                _elementCreationFactory.GetElement(elementCreationInput);
             }
 
             return positionedElements;

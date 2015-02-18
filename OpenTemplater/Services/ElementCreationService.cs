@@ -1,43 +1,64 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenTemplater.Elements;
-using OpenTemplater.Services.CreationStrategies;
 
 namespace OpenTemplater.Services
 {
-    public class ElementCreationService
+    public class ElementCreationService : IElementCreationService
     {
-        private readonly IUnitConversionService _valueConverter;
-        private readonly DocumentContext _documentContext;
+        private readonly ElementCreationFactory _elementCreationFactory;
+        private readonly IUnitConversionService _unitConversionService;
 
-        public ElementCreationService(IUnitConversionService valueConverter, DocumentContext documentContext)
+        public ElementCreationService(ElementCreationFactory elementCreationFactory,
+            IUnitConversionService unitConversionService)
         {
-            _valueConverter = valueConverter;
-            _documentContext = documentContext;
+            _elementCreationFactory = elementCreationFactory;
+            _unitConversionService = unitConversionService;
         }
 
-        public IElement GetStrategy(IElementCreationInput elementCreationInput)
+        public PageTemplateProcessingResult CreateElements(PageTemplateInput pageTemplateInput)
         {
-            switch (elementCreationInput.Name.ToLower())
+            List<IPositionedElement> staticContents = ProcessStaticContent(pageTemplateInput.StaticContent);
+            List<IPositionedElement> dynamicContents = ProcessDynamicContent(pageTemplateInput.DynamicContent);
+
+            var result = new PageTemplateProcessingResult
             {
-                case "rectangle":
-                    RectangleCreationInput rectangleCreationInput = elementCreationInput as RectangleCreationInput;
-                    return new RectangleCreationStrategy(_documentContext, _valueConverter, rectangleCreationInput).GetElement();
-                case "elipse":
-                    ElipseCreationInput elipseCreationInput = elementCreationInput as ElipseCreationInput;
-                    return new ElipseCreationStrategy(_documentContext, elipseCreationInput).GetElement();
-                case "text":
-                    TextCreationInput textCreationInput  = elementCreationInput as TextCreationInput;
-                    return new TextCreationStrategy(_documentContext, textCreationInput).GetElement();
-                case "image":
-                    ImageCreationInput imageCreationInput = elementCreationInput as ImageCreationInput;
-                    return new ImageCreationStrategy(_documentContext, imageCreationInput).GetElement();
-                case "line":
-                    LineCreationInput lineCreationInput = elementCreationInput as LineCreationInput;
-                    return new LineCreationStrategy(_documentContext, lineCreationInput).GetElement();
-                default:
-                    throw new NotSupportedException(string.Format("Element type {0} is not supported",
-                        elementCreationInput.Name.ToLower()));
-            }
+                BleedSpace = _unitConversionService.GetValue(pageTemplateInput.BleedSpace),
+                SlugSpace = _unitConversionService.GetValue(pageTemplateInput.SlugSpace),
+                DynamicContentTopMargin = _unitConversionService.GetValue(pageTemplateInput.DynamicContent.Y)
+            };
+
+            result.DynamicContentBottomMargin =
+                _unitConversionService.GetValue(pageTemplateInput.DynamicContent.Height) +
+                result.DynamicContentTopMargin;
+
+            result.DynamicContents.AddRange(dynamicContents);
+            result.StaticContents.AddRange(staticContents);
+
+            return result;
         }
+
+        private List<IPositionedElement> ProcessDynamicContent(DynamicContentInput dynamicContent)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<IPositionedElement> ProcessStaticContent(StaticContentInput staticContent)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ProcessedElement
+    {
+        public float Left { get; set; }
+        public float Top { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+    }
+
+    public interface IElementCreationService
+    {
+        PageTemplateProcessingResult CreateElements(PageTemplateInput pageTemplateInput);
     }
 }

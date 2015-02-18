@@ -42,12 +42,15 @@
   <ItemGroup>
     <Compile Include="Builders\ColorCollectionBuilder.cs" />
     <Compile Include="Builders\FontCollectionBuilder.cs" />
+    <Compile Include="IPagingService.cs" />
     <Compile Include="Services\BaseElementCreationStrategy.cs" />
     <Compile Include="Services\ColorService.cs" />
     <Compile Include="Services\ColorType.cs" />
     <Compile Include="DocumentContext.cs" />
     <Compile Include="Services\DocumentCreationService.cs" />
     <Compile Include="Services\CreationStrategies\IFontService.cs" />
+    <Compile Include="Services\DynamicContentInput.cs" />
+    <Compile Include="Services\ElementCreationFactory.cs" />
     <Compile Include="Services\ElementCreationService.cs" />
     <Compile Include="Services\ElementInputFactory.cs" />
     <Compile Include="Services\CreationStrategies\ElipseCreationStrategy.cs" />
@@ -57,7 +60,7 @@
     <Compile Include="Services\IColorService.cs" />
     <Compile Include="Services\IElementCreationInput.cs" />
     <Compile Include="Services\IElementCreationStrategy.cs" />
-    <Compile Include="Services\IElementLayoutInput.cs" />
+    <Compile Include="Services\IElementLayoutCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\ImageCreationStrategy.cs" />
     <Compile Include="Services\ImageCreationInput.cs" />
     <Compile Include="Services\IUnitConversionService.cs" />
@@ -68,8 +71,9 @@
     <Compile Include="Services\PageTemplateInput.cs" />
     <Compile Include="Services\RectangleCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\RectangleCreationStrategy.cs" />
-    <Compile Include="Services\RectangleLayoutInput.cs" />
+    <Compile Include="Services\RectangleLayoutCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\TextCreationStrategy.cs" />
+    <Compile Include="Services\StaticContentInput.cs" />
     <Compile Include="Services\TextCreationInput.cs" />
     <Compile Include="Services\UnitConversionService.cs" />
     <Compile Include="Services\WidthInput.cs" />
