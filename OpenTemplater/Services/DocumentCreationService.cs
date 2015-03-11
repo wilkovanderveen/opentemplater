@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenTemplater.Elements;
+using OpenTemplater.Elements.Modules;
 
 namespace OpenTemplater.Services
 {
@@ -9,13 +10,14 @@ namespace OpenTemplater.Services
         private readonly DocumentContext _documentContext;
         private readonly ElementCreationFactory _elementCreationFactory;
         private readonly IUnitConversionService _unitConversionService;
-
+       
         public DocumentCreationService(DocumentContext documentContext, IUnitConversionService unitConversionService,
             ElementCreationFactory elementCreationFactory)
         {
             _documentContext = documentContext;
             _unitConversionService = unitConversionService;
             _elementCreationFactory = elementCreationFactory;
+           
         }
 
         public DocumentElement CreateDocument(IEnumerable<PageTemplateInput> pageTemplateInputs)
@@ -25,13 +27,13 @@ namespace OpenTemplater.Services
             IEnumerable<PageTemplateProcessingResult> pageTemplateProcessingResults =
                 ProcessTemplates(pageTemplateInputs);
 
-            List<PageElement> resultPages = new List<PageElement>();
+            var resultPages = new List<PageElement>();
 
             foreach (PageTemplateProcessingResult input in pageTemplateProcessingResults)
             {
                 resultPages.AddRange(_documentContext.PagingService.ExtractPagesFromTemplate(input.StaticContents,
                     input.DynamicContents,
-                    input.DynamicContentTopMargin,
+                    input.Height,
                     input.DynamicContentBottomMargin));
             }
 
@@ -64,6 +66,20 @@ namespace OpenTemplater.Services
             result.StaticContents.AddRange(GetStaticElements(input.StaticContent));
             result.DynamicContents.AddRange(GetDynamicElements(input.DynamicContent));
 
+            if (input.DynamicContent != null)
+            {
+                var layout = new ContentBoundaries
+                {
+                    Top = _unitConversionService.GetValue(input.DynamicContent.Y),
+                    Height = _unitConversionService.GetValue(input.DynamicContent.Height),
+                    PageHeight = _unitConversionService.GetValue(input.Height)
+                };
+
+                result.DynamicContentTopMargin = layout.PageHeight - layout.Top;
+                result.DynamicContentBottomMargin = layout.PageHeight - (layout.Height - layout.Top);
+                result.Height = layout.PageHeight;
+            }
+
             return result;
         }
 
@@ -73,7 +89,7 @@ namespace OpenTemplater.Services
 
             if (dynamicContent == null)
             {
-                 resultList = new List<IPositionedElement>();
+                resultList = new List<IPositionedElement>();
             }
             else
             {
@@ -89,29 +105,22 @@ namespace OpenTemplater.Services
         {
             if (staticContent == null) throw new ArgumentNullException("staticContent");
 
+            IDictionary<string, IElementLayoutCreationInput> inputDictionary = new Dictionary<string, IElementLayoutCreationInput>();
             foreach (IElementLayoutCreationInput input in staticContent.Elements)
             {
-                yield return _elementCreationFactory.GetElement(input);
+                inputDictionary.Add(input.Key, input);   
             }
-        }
-    }
+            LayoutService layoutService = new LayoutService(inputDictionary);
+            IDictionary<string, Layout> layoutResults = layoutService.ProcesElements();
 
-    public class PageTemplateProcessingResult
-    {
-        public PageTemplateProcessingResult()
-        {
-            StaticContents = new List<IPositionedElement>();
-            DynamicContents = new List<IPositionedElement>();
-        }
+            IList<IPositionedElement> results = new List<IPositionedElement>();
 
-        public string Key { get; set; }
-        public List<IPositionedElement> StaticContents { get; private set; }
-        public List<IPositionedElement> DynamicContents { get; private set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
-        public float BleedSpace { get; set; }
-        public float SlugSpace { get; set; }
-        public float DynamicContentTopMargin { get; set; }
-        public float DynamicContentBottomMargin { get; set; }
+            foreach (IElementCreationInput input in staticContent.Elements)
+            {
+               IPositionedElement element =  _elementCreationFactory.GetElement(input);
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,20 +11,19 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToBottom()
         {
-            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs =
+                new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutCreationInput
+            var firstRectangleInput = new RectangleCreationInput("MyFirstRectangle")
             {
-                Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
                 WidthInput = new WidthInput {Value = 20},
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutCreationInput
+            var secondRectangleInput = new RectangleCreationInput("MySecondRectangle")
             {
-                Key = "MySecondRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput =
                     new YLayoutInput
@@ -59,20 +58,19 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToLeft()
         {
-            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs =
+                new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutCreationInput
+            var firstRectangleInput = new RectangleCreationInput("MyFirstRectangle")
             {
-                Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
                 WidthInput = new WidthInput {Value = 20},
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutCreationInput
+            var secondRectangleInput = new RectangleCreationInput("MySecondRectangle")
             {
-                Key = "MySecondRectangle",
                 XLayoutInput =
                     new XLayoutInput {Value = 20, OtherElementKey = "MyFirstRectangle", OtherElementSide = XSide.Left},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
@@ -100,20 +98,19 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToRight()
         {
-            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs =
+                new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutCreationInput
+            var firstRectangleInput = new RectangleCreationInput("MyFirstRectangle")
             {
-                Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
                 WidthInput = new WidthInput {Value = 20},
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutCreationInput
+            var secondRectangleInput = new RectangleCreationInput("MySecondRectangle")
             {
-                Key = "MySecondRectangle",
                 XLayoutInput =
                     new XLayoutInput {Value = 20, OtherElementKey = "MyFirstRectangle", OtherElementSide = XSide.Right},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
@@ -141,20 +138,19 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void ComplexLayoutConversion_OtherElementIsRelatedToTop()
         {
-            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs =
+                new Dictionary<string, IElementLayoutCreationInput>();
 
-            var firstRectangleInput = new RectangleLayoutCreationInput
+            var firstRectangleInput = new RectangleCreationInput("MyFirstRectangle")
             {
-                Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
                 WidthInput = new WidthInput {Value = 20},
                 HeightInput = new HeightInput {Value = 20}
             };
 
-            var secondRectangleInput = new RectangleLayoutCreationInput
+            var secondRectangleInput = new RectangleCreationInput("MySecondRectangle")
             {
-                Key = "MySecondRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput =
                     new YLayoutInput
@@ -189,11 +185,11 @@ namespace OpenTemplater.Test.Services
         [Test]
         public void SimpleLayoutConversion_X20_Y20_W20_H20_XaxisInverted_Result_X20_Y180_W20_H20()
         {
-            IDictionary<string, IElementLayoutCreationInput> layoutInputs = new Dictionary<string, IElementLayoutCreationInput>();
+            IDictionary<string, IElementLayoutCreationInput> layoutInputs =
+                new Dictionary<string, IElementLayoutCreationInput>();
 
-            var rectangleLayout = new RectangleLayoutCreationInput
+            var rectangleLayout = new RectangleCreationInput("MyFirstRectangle")
             {
-                Key = "MyFirstRectangle",
                 XLayoutInput = new XLayoutInput {Value = 20},
                 YLayoutInput = new YLayoutInput {Value = 20, XAxisInverted = true, PageHeight = 200},
                 WidthInput = new WidthInput {Value = 20},

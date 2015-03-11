@@ -4,7 +4,7 @@ using OpenTemplater.Elements.Modules;
 
 namespace OpenTemplater.Services
 {
-    public class LayoutService
+    public class LayoutService 
     {
         private readonly IDictionary<string, IElementLayoutCreationInput> _layoutInputs;
         private readonly IDictionary<string, Layout> _processedLayouts;

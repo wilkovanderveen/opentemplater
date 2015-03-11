@@ -7,6 +7,6 @@
         public float Height { get; private set; }
         public float XPosition { get; private set; }
         public float YPosition { get; private set; }
-        public byte ZOrder { get; private set; }
+        public int ZOrder { get; private set; }
     }
 }

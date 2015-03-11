@@ -43,10 +43,12 @@
     <Compile Include="Builders\ColorCollectionBuilder.cs" />
     <Compile Include="Builders\FontCollectionBuilder.cs" />
     <Compile Include="IPagingService.cs" />
+    <Compile Include="PagingService.cs" />
     <Compile Include="Services\BaseElementCreationStrategy.cs" />
     <Compile Include="Services\ColorService.cs" />
     <Compile Include="Services\ColorType.cs" />
     <Compile Include="DocumentContext.cs" />
+    <Compile Include="Services\ContentBoundaries.cs" />
     <Compile Include="Services\DocumentCreationService.cs" />
     <Compile Include="Services\CreationStrategies\IFontService.cs" />
     <Compile Include="Services\DynamicContentInput.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Services\HeightInput.cs" />
     <Compile Include="Services\IColorService.cs" />
     <Compile Include="Services\IElementCreationInput.cs" />
+    <Compile Include="Services\IElementCreationService.cs" />
     <Compile Include="Services\IElementCreationStrategy.cs" />
     <Compile Include="Services\IElementLayoutCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\ImageCreationStrategy.cs" />
@@ -69,9 +72,9 @@
     <Compile Include="Services\LineCreationInput.cs" />
     <Compile Include="Services\PageCreationService.cs" />
     <Compile Include="Services\PageTemplateInput.cs" />
+    <Compile Include="Services\PageTemplateProcessingResult.cs" />
     <Compile Include="Services\RectangleCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\RectangleCreationStrategy.cs" />
-    <Compile Include="Services\RectangleLayoutCreationInput.cs" />
     <Compile Include="Services\CreationStrategies\TextCreationStrategy.cs" />
     <Compile Include="Services\StaticContentInput.cs" />
     <Compile Include="Services\TextCreationInput.cs" />

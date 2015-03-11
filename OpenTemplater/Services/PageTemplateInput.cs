@@ -1,17 +1,10 @@
-using System.Collections.Generic;
-
 namespace OpenTemplater.Services
 {
     public class PageTemplateInput
     {
-        public PageTemplateInput()
-        {
-        
-        }
-
         public string Key { get; set; }
 
-       
+
         public DynamicContentInput DynamicContent { get; set; }
         public StaticContentInput StaticContent { get; set; }
         public string Width { get; set; }

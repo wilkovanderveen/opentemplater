@@ -1,10 +1,17 @@
 ﻿namespace OpenTemplater.Services
 {
-    public class ElipseCreationInput : IElementCreationInput
+    public class ElipseCreationInput : BaseElementCreationInput, IElementCreationInput
     {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public string ZOrder { get; private set; }
-        public IElementLayoutCreationInput LayoutCreationInput { get; private set; }
+        public ElipseCreationInput(string key)
+            : base(key)
+        {
+        }
+
+        public override string Name
+        {
+            get { return "Elipse"; }
+        }
+
+        public byte? ZOrder { get; set; }
     }
 }

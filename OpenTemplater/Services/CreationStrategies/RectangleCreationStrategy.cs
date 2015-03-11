@@ -20,7 +20,7 @@ namespace OpenTemplater.Services.CreationStrategies
                 BorderColor = DocumentContext.ColorService.GetColor(Input.BorderColor),
                 BorderWidth = _unitConversionService.GetValue(Input.BorderWidth),
                 Color = DocumentContext.ColorService.GetColor(Input.FillColor),
-                ZOrder = Byte.Parse(!string.IsNullOrWhiteSpace(Input.ZOrder) ? Input.ZOrder : "0")
+                ZOrder = Input.ZOrder == null ? 0 : int.Parse(Input.ZOrder)
             };
 
             return rectangle;

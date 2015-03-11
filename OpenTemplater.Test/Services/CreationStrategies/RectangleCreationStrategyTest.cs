@@ -28,12 +28,11 @@ namespace OpenTemplater.Test.Services.CreationStrategies
             IFontService fontService = new FontService(fontDictionary);
             var documentContext = new DocumentContext(colorService, fontService, new PagingService());
 
-            var rectangleCreationInput = new RectangleCreationInput
+            var rectangleCreationInput = new RectangleCreationInput("Rectangle")
             {
                 BorderColor = "blue",
                 BorderWidth = "2pt",
                 FillColor = "red",
-                Key = "Rectangle",
                 ZOrder = "1"
             };
 

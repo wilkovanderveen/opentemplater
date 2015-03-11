@@ -1,10 +1,17 @@
 ﻿namespace OpenTemplater.Services
 {
-    public class TextCreationInput : IElementCreationInput
+    public class TextCreationInput : BaseElementCreationInput, IElementCreationInput
     {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public string ZOrder { get; private set; }
+        public TextCreationInput(string key) : base(key)
+        {
+        }
+
+
+        public override string Name
+        {
+            get { return "Text"; }
+        }
+
         public IElementLayoutCreationInput LayoutCreationInput { get; private set; }
     }
 }

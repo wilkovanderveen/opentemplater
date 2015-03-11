@@ -23,9 +23,20 @@ namespace OpenTemplater.Services
 
             if (rectangleElementNode.Attributes != null)
             {
-                var rectangleCreationInput = new RectangleCreationInput
+                string key = rectangleElementNode.Attributes["key"].Value;
+                byte zOrder;
+
+                if (rectangleElementNode.Attributes["zOrder"] != null)
                 {
-                    Key = rectangleElementNode.Attributes["key"].Value,
+                    if (!byte.TryParse(rectangleElementNode.Attributes["zOrder"].Value, out zOrder))
+                    {
+                        throw new Exception(string.Format("{0} is not a valid ZOrder value."));
+                    }
+                }
+
+                var rectangleCreationInput = new RectangleCreationInput(key)
+                {
+                  
                     FillColor = rectangleElementNode.Attributes["fillColor"].Value,
                     BorderColor = rectangleElementNode.Attributes["borderColor"].Value
                 };

@@ -4,6 +4,6 @@
     {
         string Key { get; }
         string Name { get; }
-        string ZOrder { get; }
+        string ZOrder { get; set; }
     }
 }

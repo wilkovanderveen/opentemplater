@@ -1,12 +1,17 @@
 ﻿namespace OpenTemplater.Services
 {
-    public class ImageCreationInput : IElementCreationInput
+    public class ImageCreationInput : BaseElementCreationInput, IElementCreationInput
     {
-        public string Key { get; private set; }
-        public string Name { get; private set; }
-        public string ZOrder { get; private set; }
-        public IElementLayoutCreationInput LayoutCreationInput { get; private set; }
+        public ImageCreationInput(string key) : base(key)
+        {
+        }
+        
         public string FileName { get; set; }
         public string Dpi { get; set; }
+
+        public override string Name
+        {
+            get { return "Image"; }
+        }
     }
 }
