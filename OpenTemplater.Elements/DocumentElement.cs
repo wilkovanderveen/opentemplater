@@ -2,7 +2,7 @@
 
 namespace OpenTemplater.Elements
 {
-    public class DocumentElement
+    public class DocumentElement 
     {
         public DocumentElement()
         {
@@ -10,5 +10,6 @@ namespace OpenTemplater.Elements
         }
 
         public IList<PageElement> Pages { get; set; }
+        public string Author { get; set; }
     }
 }

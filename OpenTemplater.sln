@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater", "OpenTempla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Test", "OpenTemplater.Test\OpenTemplater.Test.csproj", "{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Output.PDF", "OpenTemplater.Output.PDF\OpenTemplater.Output.PDF.csproj", "{0A4F8E36-E02A-41FC-BAA7-E64B5E90E034}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A719B464-A3A6-4F82-B577-A04E4E5755EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTemplater.Output.PDF.Test", "OpenTemplater.Output.PDF.Test\OpenTemplater.Output.PDF.Test.csproj", "{E3B899D8-D152-4493-98C1-12CC789C8BE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +37,20 @@ Global
 		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4F8E36-E02A-41FC-BAA7-E64B5E90E034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4F8E36-E02A-41FC-BAA7-E64B5E90E034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4F8E36-E02A-41FC-BAA7-E64B5E90E034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4F8E36-E02A-41FC-BAA7-E64B5E90E034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3B899D8-D152-4493-98C1-12CC789C8BE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B899D8-D152-4493-98C1-12CC789C8BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B899D8-D152-4493-98C1-12CC789C8BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B899D8-D152-4493-98C1-12CC789C8BE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5B58B23-D46A-4EDC-9C95-34D34339C5FA} = {A719B464-A3A6-4F82-B577-A04E4E5755EF}
+		{450C4BF5-5ECA-455A-B573-0BDAC4A352CA} = {A719B464-A3A6-4F82-B577-A04E4E5755EF}
 	EndGlobalSection
 EndGlobal
