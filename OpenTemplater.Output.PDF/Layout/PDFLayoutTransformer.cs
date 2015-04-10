@@ -1,4 +1,4 @@
-﻿namespace OpenTemplater.Output.PDF
+﻿namespace OpenTemplater.Output.PDF.Layout
 {
     public class PDFLayoutTransformer
     {

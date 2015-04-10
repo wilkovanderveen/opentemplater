@@ -1,18 +1,27 @@
+using System;
 using OpenTemplater.Elements;
 
 namespace OpenTemplater.Output.PDF.Renderers
 {
     public class PageRenderer : BaseRenderer<PageElement>
     {
-        public PageRenderer(PageElement pageElement, RenderContext renderContext) : base(pageElement, renderContext)
+        private readonly ElementRendererFactory _elementRendererFactory;
+
+        public PageRenderer(PageElement pageElement, RenderContext renderContext, ElementRendererFactory elementRendererFactory) : base(pageElement, renderContext)
         {
+            if (elementRendererFactory == null) throw new ArgumentNullException("elementRendererFactory");
+            _elementRendererFactory = elementRendererFactory;
         }
 
         public override void Render()
         {
             RenderContext.Document.NewPage();
 
-            // TODO : Render child elements.
+            foreach (IPositionedElement childElement in Element.Elements)
+            {
+               IRenderer renderer =  _elementRendererFactory.GetRenderer(childElement);
+               renderer.Render();
+            }
         }
     }
 }

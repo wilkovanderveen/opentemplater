@@ -11,5 +11,6 @@ namespace OpenTemplater.Elements
 
         public IList<PageElement> Pages { get; set; }
         public string Author { get; set; }
+        public string Subject { get; set; }
     }
 }

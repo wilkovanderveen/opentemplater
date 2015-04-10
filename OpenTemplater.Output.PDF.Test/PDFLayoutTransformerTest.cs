@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenTemplater.Output.PDF.Layout;
 
 namespace OpenTemplater.Output.PDF.Test
 {
@@ -6,7 +7,7 @@ namespace OpenTemplater.Output.PDF.Test
     public class PDFLayoutTransformerTest
     {
         [Test]
-        public void DoSomething()
+        public void GetLayout_ResultIsOkay()
         {
             var test = new PDFLayoutTransformer();
             TransformedLayout result = test.GetLayout(20, 40, 100, 100);
