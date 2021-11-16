@@ -1,4 +1,4 @@
 opentemplater
 =============
 
-Make professional PDF files bases on XML templates.
+Make professional PDF files based on XML templates.
